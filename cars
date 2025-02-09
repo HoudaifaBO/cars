@@ -1,0 +1,192 @@
+[
+  {
+    "id": "CAR-001",
+    "name": "Turbo Falcon X",
+    "description": "Een supersnelle sportwagen met geavanceerde aerodynamica en een twin-turbo V8 motor.",
+    "price": 120000,
+    "isAvailable": true,
+    "releaseDate": "2023-07-15",
+    "imageUrl": "https://example.com/images/turbo-falcon-x.jpg",
+    "category": "Sportwagen",
+    "features": ["Twin-Turbo V8", "Carbon Fiber Body", "Adaptive Suspension"],
+    "manufacturer": {
+      "id": "MANU-001",
+      "name": "Falcon Motors",
+      "founder": "James Falcon",
+      "logoUrl": "https://example.com/images/brands/falcon-motors-logo.jpg",
+      "foundedYear": 1985,
+      "motto": "Speed Redefined"
+    }
+  },
+  {
+    "id": "CAR-002",
+    "name": "EcoDrive EV",
+    "description": "Een innovatieve elektrische auto met een indrukwekkend rijbereik en geavanceerde AI-integratie.",
+    "price": 45000,
+    "isAvailable": true,
+    "releaseDate": "2024-01-10",
+    "imageUrl": "https://example.com/images/ecodrive-ev.jpg",
+    "category": "Elektrische Auto",
+    "features": ["500km Range", "Autonomous Driving", "Solar Charging Roof"],
+    "manufacturer": {
+      "id": "MANU-002",
+      "name": "EcoMotors",
+      "founder": "Lisa Green",
+      "logoUrl": "https://example.com/images/brands/ecomotors-logo.jpg",
+      "foundedYear": 2010,
+      "motto": "Driving the Future"
+    }
+  },
+  {
+    "id": "CAR-003",
+    "name": "RoadMaster 4x4",
+    "description": "Een robuuste terreinwagen met vierwielaandrijving en een krachtige dieselmotor.",
+    "price": 75000,
+    "isAvailable": false,
+    "releaseDate": "2022-06-20",
+    "imageUrl": "https://example.com/images/roadmaster-4x4.jpg",
+    "category": "SUV",
+    "features": ["All-Wheel Drive", "Off-Road Tires", "Reinforced Chassis"],
+    "manufacturer": {
+      "id": "MANU-003",
+      "name": "MasterAuto",
+      "founder": "David Roadman",
+      "logoUrl": "https://example.com/images/brands/masterauto-logo.jpg",
+      "foundedYear": 1995,
+      "motto": "Conquer Any Road"
+    }
+  },
+  {
+    "id": "CAR-004",
+    "name": "Urban Mini S",
+    "description": "Een compacte stadsauto met slimme parkeertechnologie en een zuinige hybride motor.",
+    "price": 30000,
+    "isAvailable": true,
+    "releaseDate": "2023-09-05",
+    "imageUrl": "https://example.com/images/urban-mini-s.jpg",
+    "category": "Compact",
+    "features": ["Hybrid Engine", "Self-Parking", "Wireless Charging"],
+    "manufacturer": {
+      "id": "MANU-004",
+      "name": "CityDrive",
+      "founder": "Robert Klein",
+      "logoUrl": "https://example.com/images/brands/citydrive-logo.jpg",
+      "foundedYear": 2005,
+      "motto": "Efficiency Meets Comfort"
+    }
+  },
+  {
+    "id": "CAR-005",
+    "name": "Hyperion Speedster",
+    "description": "Een hypercar met een hybride aandrijflijn en een topsnelheid van 400 km/u.",
+    "price": 250000,
+    "isAvailable": false,
+    "releaseDate": "2023-05-12",
+    "imageUrl": "https://example.com/images/hyperion-speedster.jpg",
+    "category": "Hypercar",
+    "features": ["Hybrid V12 Engine", "Aerodynamic Carbon Design", "Active Rear Wing"],
+    "manufacturer": {
+      "id": "MANU-005",
+      "name": "Hyperion Motors",
+      "founder": "Liam Vector",
+      "logoUrl": "https://example.com/images/brands/hyperion-motors-logo.jpg",
+      "foundedYear": 2018,
+      "motto": "Speed Without Limits"
+    }
+  },
+  {
+    "id": "CAR-006",
+    "name": "Grand Voyager LX",
+    "description": "Een luxe sedan met een ultracomfortabel interieur en geavanceerde rijhulpsystemen.",
+    "price": 95000,
+    "isAvailable": true,
+    "releaseDate": "2024-02-01",
+    "imageUrl": "https://example.com/images/grand-voyager-lx.jpg",
+    "category": "Luxury Sedan",
+    "features": ["Massage Seats", "AI Voice Assistant", "360-degree Camera"],
+    "manufacturer": {
+      "id": "MANU-006",
+      "name": "Voyager Autos",
+      "founder": "Stephanie Crown",
+      "logoUrl": "https://example.com/images/brands/voyager-autos-logo.jpg",
+      "foundedYear": 2000,
+      "motto": "Luxury in Motion"
+    }
+  },
+ {
+    "id": "CAR-007",
+    "name": "SolarCruiser",
+    "description": "Een revolutionaire zonneauto die volledig op zonne-energie rijdt, ontworpen voor duurzame mobiliteit.",
+    "price": 60000,
+    "isAvailable": true,
+    "releaseDate": "2024-06-18",
+    "imageUrl": "https://example.com/images/solarcruiser.jpg",
+    "category": "Elektrische Auto",
+    "features": ["100% Solar Powered", "AI Energy Optimization", "Regenerative Braking"],
+    "manufacturer": {
+      "id": "MANU-007",
+      "name": "SolarTech Motors",
+      "founder": "Emma Bright",
+      "logoUrl": "https://example.com/images/brands/solartech-logo.jpg",
+      "foundedYear": 2015,
+      "motto": "Driving on Sunshine"
+    }
+  },
+  {
+    "id": "CAR-008",
+    "name": "Thunder Striker",
+    "description": "Een brute muscle car met een 6.2L supercharged V8 motor en een klassiek ontwerp.",
+    "price": 85000,
+    "isAvailable": false,
+    "releaseDate": "2023-11-30",
+    "imageUrl": "https://example.com/images/thunder-striker.jpg",
+    "category": "Muscle Car",
+    "features": ["Supercharged V8", "Launch Control", "Retro Design"],
+    "manufacturer": {
+      "id": "MANU-008",
+      "name": "American Thunder",
+      "founder": "Jack Reynolds",
+      "logoUrl": "https://example.com/images/brands/american-thunder-logo.jpg",
+      "foundedYear": 1972,
+      "motto": "Raw Power, Pure Performance"
+    }
+  },
+  {
+    "id": "CAR-009",
+    "name": "Glacier Rover",
+    "description": "Een premium SUV met vierwielaandrijving en een hypermoderne hybride motor voor extreme omstandigheden.",
+    "price": 110000,
+    "isAvailable": true,
+    "releaseDate": "2024-09-01",
+    "imageUrl": "https://example.com/images/glacier-rover.jpg",
+    "category": "SUV",
+    "features": ["Hybrid Powertrain", "Terrain Response System", "Adaptive Air Suspension"],
+    "manufacturer": {
+      "id": "MANU-009",
+      "name": "Glacier Automobiles",
+      "founder": "Lucas White",
+      "logoUrl": "https://example.com/images/brands/glacier-logo.jpg",
+      "foundedYear": 1989,
+      "motto": "Explore Without Limits"
+    }
+  },
+  {
+    "id": "CAR-010",
+    "name": "Zenith Phantom",
+    "description": "Een ultieme luxewagen met een fluisterstille elektrische motor en ongeëvenaarde comfortfeatures.",
+    "price": 275000,
+    "isAvailable": false,
+    "releaseDate": "2025-01-15",
+    "imageUrl": "https://example.com/images/zenith-phantom.jpg",
+    "category": "Luxury Sedan",
+    "features": ["Silent Electric Drive", "Handcrafted Interior", "Augmented Reality HUD"],
+    "manufacturer": {
+      "id": "MANU-010",
+      "name": "Zenith Motors",
+      "founder": "Alexander Sterling",
+      "logoUrl": "https://example.com/images/brands/zenith-logo.jpg",
+      "foundedYear": 1950,
+      "motto": "Excellence Without Compromise"
+    }
+  }
+]

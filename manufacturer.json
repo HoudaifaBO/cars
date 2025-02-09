@@ -3,7 +3,6 @@
     "id": "MANU-001",
     "name": "Falcon Motors",
     "founder": "James Falcon",
-    "logoUrl": "https://example.com/images/brands/falcon-motors-logo.jpg",
     "foundedYear": 1985,
     "motto": "Speed Redefined"
   },
@@ -11,7 +10,6 @@
     "id": "MANU-002",
     "name": "EcoMotors",
     "founder": "Lisa Green",
-    "logoUrl": "https://example.com/images/brands/ecomotors-logo.jpg",
     "foundedYear": 2010,
     "motto": "Driving the Future"
   },
@@ -19,7 +17,6 @@
     "id": "MANU-003",
     "name": "MasterAuto",
     "founder": "David Roadman",
-    "logoUrl": "https://example.com/images/brands/masterauto-logo.jpg",
     "foundedYear": 1995,
     "motto": "Conquer Any Road"
   },
@@ -27,7 +24,6 @@
     "id": "MANU-004",
     "name": "CityDrive",
     "founder": "Robert Klein",
-    "logoUrl": "https://example.com/images/brands/citydrive-logo.jpg",
     "foundedYear": 2005,
     "motto": "Efficiency Meets Comfort"
   },
@@ -35,7 +31,6 @@
     "id": "MANU-005",
     "name": "Hyperion Motors",
     "founder": "Liam Vector",
-    "logoUrl": "https://example.com/images/brands/hyperion-motors-logo.jpg",
     "foundedYear": 2018,
     "motto": "Speed Without Limits"
   },
@@ -43,7 +38,6 @@
     "id": "MANU-006",
     "name": "Voyager Autos",
     "founder": "Stephanie Crown",
-    "logoUrl": "https://example.com/images/brands/voyager-autos-logo.jpg",
     "foundedYear": 2000,
     "motto": "Luxury in Motion"
   },
@@ -51,7 +45,6 @@
     "id": "MANU-007",
     "name": "SolarTech Motors",
     "founder": "Emma Bright",
-    "logoUrl": "https://example.com/images/brands/solartech-logo.jpg",
     "foundedYear": 2015,
     "motto": "Driving on Sunshine"
   },
@@ -59,7 +52,6 @@
     "id": "MANU-008",
     "name": "American Thunder",
     "founder": "Jack Reynolds",
-    "logoUrl": "https://example.com/images/brands/american-thunder-logo.jpg",
     "foundedYear": 1972,
     "motto": "Raw Power, Pure Performance"
   },
@@ -67,7 +59,6 @@
     "id": "MANU-009",
     "name": "Glacier Automobiles",
     "founder": "Lucas White",
-    "logoUrl": "https://example.com/images/brands/glacier-logo.jpg",
     "foundedYear": 1989,
     "motto": "Explore Without Limits"
   },
@@ -75,7 +66,6 @@
     "id": "MANU-010",
     "name": "Zenith Motors",
     "founder": "Alexander Sterling",
-    "logoUrl": "https://example.com/images/brands/zenith-logo.jpg",
     "foundedYear": 1950,
     "motto": "Excellence Without Compromise"
   }

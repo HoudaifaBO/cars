@@ -6,7 +6,7 @@
     "price": 120000,
     "isAvailable": true,
     "releaseDate": "2023-07-15",
-    "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/TurboFalconX.jpg",
+    "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/TurboFalconX.jpg?raw=true",
     "category": "Sportwagen",
     "features": ["Twin-Turbo V8", "Carbon Fiber Body", "Adaptive Suspension"],
     "manufacturer": {
@@ -24,7 +24,7 @@
     "price": 45000,
     "isAvailable": true,
     "releaseDate": "2024-01-10",
-    "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/EcoDriveEV.jpg",
+    "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/EcoDriveEV.jpg?raw=true",
     "category": "Elektrische Auto",
     "features": ["500km Range", "Autonomous Driving", "Solar Charging Roof"],
     "manufacturer": {
@@ -42,7 +42,7 @@
     "price": 75000,
     "isAvailable": false,
     "releaseDate": "2022-06-20",
-    "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/RoadMaster4x4.jpg",
+    "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/RoadMaster4x4.jpg?raw=true",
     "category": "SUV",
     "features": ["All-Wheel Drive", "Off-Road Tires", "Reinforced Chassis"],
     "manufacturer": {
@@ -60,7 +60,7 @@
     "price": 30000,
     "isAvailable": true,
     "releaseDate": "2023-09-05",
-    "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/UrbanMiniS.jpg",
+    "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/UrbanMiniS.jpg?raw=true",
     "category": "Compact",
     "features": ["Hybrid Engine", "Self-Parking", "Wireless Charging"],
     "manufacturer": {
@@ -78,7 +78,7 @@
     "price": 250000,
     "isAvailable": false,
     "releaseDate": "2023-05-12",
-    "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/HyperionSpeedster.jpg",
+    "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/HyperionSpeedster.jpg?raw=true",
     "category": "Hypercar",
     "features": ["Hybrid V12 Engine", "Aerodynamic Carbon Design", "Active Rear Wing"],
     "manufacturer": {
@@ -96,7 +96,7 @@
     "price": 95000,
     "isAvailable": true,
     "releaseDate": "2024-02-01",
-    "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/GrandVoyagerLX.jpg",
+    "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/GrandVoyagerLX.jpg?raw=true",
     "category": "Luxury Sedan",
     "features": ["Massage Seats", "AI Voice Assistant", "360-degree Camera"],
     "manufacturer": {
@@ -114,7 +114,7 @@
     "price": 60000,
     "isAvailable": true,
     "releaseDate": "2024-06-18",
-    "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/SolarCruiser.jpg",
+    "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/SolarCruiser.jpg?raw=true",
     "category": "Elektrische Auto",
     "features": ["100% Solar Powered", "AI Energy Optimization", "Regenerative Braking"],
     "manufacturer": {
@@ -132,7 +132,7 @@
     "price": 85000,
     "isAvailable": false,
     "releaseDate": "2023-11-30",
-    "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/ThunderStriker.jpg",
+    "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/ThunderStriker.jpg?raw=true",
     "category": "Muscle Car",
     "features": ["Supercharged V8", "Launch Control", "Retro Design"],
     "manufacturer": {
@@ -150,7 +150,7 @@
     "price": 110000,
     "isAvailable": true,
     "releaseDate": "2024-09-01",
-    "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/GlacierRover.jpg",
+    "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/GlacierRover.jpg?raw=true",
     "category": "SUV",
     "features": ["Hybrid Powertrain", "Terrain Response System", "Adaptive Air Suspension"],
     "manufacturer": {
@@ -168,7 +168,7 @@
     "price": 275000,
     "isAvailable": false,
     "releaseDate": "2025-01-15",
-    "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/ZenithPhantom.jpg",
+    "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/ZenithPhantom.jpg?raw=true",
     "category": "Luxury Sedan",
     "features": ["Silent Electric Drive", "Handcrafted Interior", "Augmented Reality HUD"],
     "manufacturer": {

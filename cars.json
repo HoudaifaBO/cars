@@ -8,7 +8,11 @@
     "releaseDate": "2023-07-15",
     "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/TurboFalconX.jpg?raw=true",
     "category": "Sportwagen",
-    "features": ["Twin-Turbo V8", "Carbon Fiber Body", "Adaptive Suspension"],
+    "features": [
+      "Twin-Turbo V8",
+      "Carbon Fiber Body",
+      "Adaptive Suspension"
+    ],
     "manufacturer": {
       "id": "MANU-001",
       "name": "Falcon Motors",
@@ -26,7 +30,11 @@
     "releaseDate": "2024-01-10",
     "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/EcoDriveEV.jpg?raw=true",
     "category": "Elektrische Auto",
-    "features": ["500km Range", "Autonomous Driving", "Solar Charging Roof"],
+    "features": [
+      "500km Range",
+      "Autonomous Driving",
+      "Solar Charging Roof"
+    ],
     "manufacturer": {
       "id": "MANU-002",
       "name": "EcoMotors",
@@ -44,7 +52,11 @@
     "releaseDate": "2022-06-20",
     "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/RoadMaster4x4.jpg?raw=true",
     "category": "SUV",
-    "features": ["All-Wheel Drive", "Off-Road Tires", "Reinforced Chassis"],
+    "features": [
+      "All-Wheel Drive",
+      "Off-Road Tires",
+      "Reinforced Chassis"
+    ],
     "manufacturer": {
       "id": "MANU-003",
       "name": "MasterAuto",
@@ -62,7 +74,11 @@
     "releaseDate": "2023-09-05",
     "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/UrbanMiniS.jpg?raw=true",
     "category": "Compact",
-    "features": ["Hybrid Engine", "Self-Parking", "Wireless Charging"],
+    "features": [
+      "Hybrid Engine",
+      "Self-Parking",
+      "Wireless Charging"
+    ],
     "manufacturer": {
       "id": "MANU-004",
       "name": "CityDrive",
@@ -80,7 +96,11 @@
     "releaseDate": "2023-05-12",
     "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/HyperionSpeedster.jpg?raw=true",
     "category": "Hypercar",
-    "features": ["Hybrid V12 Engine", "Aerodynamic Carbon Design", "Active Rear Wing"],
+    "features": [
+      "Hybrid V12 Engine",
+      "Aerodynamic Carbon Design",
+      "Active Rear Wing"
+    ],
     "manufacturer": {
       "id": "MANU-005",
       "name": "Hyperion Motors",
@@ -98,7 +118,11 @@
     "releaseDate": "2024-02-01",
     "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/GrandVoyagerLX.jpg?raw=true",
     "category": "Luxury Sedan",
-    "features": ["Massage Seats", "AI Voice Assistant", "360-degree Camera"],
+    "features": [
+      "Massage Seats",
+      "AI Voice Assistant",
+      "360-degree Camera"
+    ],
     "manufacturer": {
       "id": "MANU-006",
       "name": "Voyager Autos",
@@ -107,7 +131,7 @@
       "motto": "Luxury in Motion"
     }
   },
- {
+  {
     "id": "CAR-007",
     "name": "SolarCruiser",
     "description": "Een revolutionaire zonneauto die volledig op zonne-energie rijdt, ontworpen voor duurzame mobiliteit.",
@@ -116,7 +140,11 @@
     "releaseDate": "2024-06-18",
     "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/SolarCruiser.jpg?raw=true",
     "category": "Elektrische Auto",
-    "features": ["100% Solar Powered", "AI Energy Optimization", "Regenerative Braking"],
+    "features": [
+      "100% Solar Powered",
+      "AI Energy Optimization",
+      "Regenerative Braking"
+    ],
     "manufacturer": {
       "id": "MANU-007",
       "name": "SolarTech Motors",
@@ -134,7 +162,11 @@
     "releaseDate": "2023-11-30",
     "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/ThunderStriker.jpg?raw=true",
     "category": "Muscle Car",
-    "features": ["Supercharged V8", "Launch Control", "Retro Design"],
+    "features": [
+      "Supercharged V8",
+      "Launch Control",
+      "Retro Design"
+    ],
     "manufacturer": {
       "id": "MANU-008",
       "name": "American Thunder",
@@ -152,7 +184,11 @@
     "releaseDate": "2024-09-01",
     "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/GlacierRover.jpg?raw=true",
     "category": "SUV",
-    "features": ["Hybrid Powertrain", "Terrain Response System", "Adaptive Air Suspension"],
+    "features": [
+      "Hybrid Powertrain",
+      "Terrain Response System",
+      "Adaptive Air Suspension"
+    ],
     "manufacturer": {
       "id": "MANU-009",
       "name": "Glacier Automobiles",
@@ -170,7 +206,11 @@
     "releaseDate": "2025-01-15",
     "imageUrl": "https://github.com/HoudaifaBO/cars/blob/main/ZenithPhantom.jpg?raw=true",
     "category": "Luxury Sedan",
-    "features": ["Silent Electric Drive", "Handcrafted Interior", "Augmented Reality HUD"],
+    "features": [
+      "Silent Electric Drive",
+      "Handcrafted Interior",
+      "Augmented Reality HUD"
+    ],
     "manufacturer": {
       "id": "MANU-010",
       "name": "Zenith Motors",

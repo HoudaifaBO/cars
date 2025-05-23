@@ -1,0 +1,183 @@
+<!-- filepath: vsls:/Express-Applicatie/views/car-detail.ejs -->
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= car.name %> - Auto Details
+    </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <!-- Include navigation bar partial -->
+    <%- include('partials/navbar') %>
+
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <a href="/cars" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Terug naar overzicht
+                    </a>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Car Image Column -->
+                <div class="col-md-5">
+                    <% if(car.imageUrl) { %>
+                        <img src="<%= car.imageUrl %>" alt="<%= car.name %>" class="img-fluid rounded mb-3">
+                        <% } else { %>
+                            <div class="bg-light rounded d-flex align-items-center justify-content-center"
+                                style="height: 300px">
+                                <p class="text-muted">Geen afbeelding beschikbaar</p>
+                            </div>
+                            <% } %>
+                </div>
+
+                <!-- Car Details Column -->
+                <div class="col-md-7">
+                    <h1>
+                        <%= car.name %>
+                    </h1>
+
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h3>Auto Gegevens</h3>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <tbody>
+                                    <tr>
+                                        <th>ID:</th>
+                                        <td>
+                                            <%= car.id %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Naam:</th>
+                                        <td>
+                                            <%= car.name %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Categorie:</th>
+                                        <td>
+                                            <%= car.category || 'N/A' %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Releasedate:</th>
+                                        <td>
+                                            <%= car.releaseDate || 'N/A' %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Prijs:</th>
+                                        <td>€<%= typeof car.price==='number' ? car.price.toLocaleString('nl-NL') : 'N/A'
+                                                %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Beschikbaar:</th>
+                                        <td>
+                                            <%= car.isAvailable ? 'Ja' : 'Nee' %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Features:</th>
+                                        <td>
+                                            <% if(car.features && car.features.length> 0) { %>
+                                                <ul>
+                                                    <% car.features.forEach(feature=> { %>
+                                                        <li>
+                                                            <%= feature %>
+                                                        </li>
+                                                        <% }); %>
+                                                </ul>
+                                                <% } else { %>
+                                                    Geen features beschikbaar
+                                                    <% } %>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Manufacturer Information Section -->
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h3>Fabrikant Informatie</h3>
+                            <a href="/manufacturers/<%= car.manufacturer.id %>" class="btn btn-primary">
+                                Bekijk Fabrikant Details
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4>
+                                        <%= car.manufacturer.name %>
+                                    </h4>
+                                    <table class="table table-striped">
+                                        <tbody>
+                                            <tr>
+                                                <th>Oprichter:</th>
+                                                <td>
+                                                    <%= car.manufacturer.founder || 'N/A' %>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Oprichtingsjaar:</th>
+                                                <td>
+                                                    <%= car.manufacturer.foundedYear || 'N/A' %>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Motto:</th>
+                                                <td>
+                                                    <%= car.manufacturer.motto || 'N/A' %>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Description Section -->
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Beschrijving</h3>
+                        </div>
+                        <div class="card-body">
+                            <% if(car.description) { %>
+                                <p>
+                                    <%= car.description %>
+                                </p>
+                                <% } else { %>
+                                    <p class="text-muted">Geen beschrijving beschikbaar.</p>
+                                    <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

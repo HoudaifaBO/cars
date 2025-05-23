@@ -1,38 +1,10 @@
 import { MongoClient, Collection, Db } from 'mongodb';
 import fetch from 'node-fetch';
 import dotenv from 'dotenv';
+import {Car, Manufacturer} from './interfaces'
 
 dotenv.config();
 
-// Type definitions
-export interface Car {
-    id: string;
-    name: string;
-    description?: string;
-    price: number;
-    isAvailable: boolean;
-    releaseDate: string;
-    imageUrl?: string;
-    category: string;
-    features: string[];
-    manufacturer: {
-        id: string;
-        name: string;
-        founder: string;
-        foundedYear: number;
-        motto: string;
-    };
-}
-
-export interface Manufacturer {
-    id: string;
-    name: string;
-    founder: string;
-    foundedYear: number;
-    motto: string;
-    description?: string;
-    logoUrl?: string;
-}
 
 // MongoDB connection
 let client: MongoClient;
@@ -137,10 +109,18 @@ export async function findManufacturerById(id: string): Promise<Manufacturer | n
     return await manufacturersCollection.findOne({ id });
 }
 
-// Close the MongoDB connection (for graceful shutdown)
-export async function closeDB(): Promise<void> {
-    if (client) {
-        await client.close();
-        console.log('MongoDB connection closed');
-    }
+export async function updateCar(id: string, updatedData: Partial<Car>): Promise<boolean> {
+    const result = await carsCollection.updateOne(
+        { id },
+        { $set: updatedData }
+    );
+    return result.modifiedCount > 0;
+}
+
+export async function updateManufacturer(id: string, updatedData: Partial<Manufacturer>): Promise<boolean> {
+    const result = await manufacturersCollection.updateOne(
+        { id },
+        { $set: updatedData }
+    );
+    return result.modifiedCount > 0;
 }

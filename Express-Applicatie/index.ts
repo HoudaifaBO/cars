@@ -1,8 +1,16 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import path from "path";
-import fetch from "node-fetch";
-import { Manufacturer, Car } from '../interfaces'
+import {
+    connectDB,
+    fetchCarsFromDB,
+    fetchManufacturersFromDB,
+    findCarById,
+    findManufacturerById,
+    updateCar,
+    updateManufacturer
+} from './database';
+import { Car, Manufacturer } from './interfaces'
 
 dotenv.config();
 
@@ -16,29 +24,8 @@ app.set("views", path.join(__dirname, "views"));
 
 app.set("port", process.env.PORT ?? 3000);
 
-const Cars_JSON = 'https://raw.githubusercontent.com/HoudaifaBO/cars-json/main/cars.json';
-const Manufacturers_JSON = 'https://raw.githubusercontent.com/HoudaifaBO/cars-json/main/manufacturer.json';
-
-async function fetchCars(): Promise<Car[]> {
-    const response = await fetch(Cars_JSON);
-    if (!response.ok) {
-        throw new Error("Failed to fetch cars");
-    }
-    const data: Car[] = await response.json() as Car[];
-    return data;
-}
-
-async function fetchManufacturers(): Promise<Manufacturer[]> {
-    const response = await fetch(Manufacturers_JSON);
-    if (!response.ok) {
-        throw new Error("Failed to fetch manufacturers");
-    }
-    const data: Manufacturer[] = await response.json() as Manufacturer[];
-    return data;
-}
-
 app.get("/cars", async (req, res) => {
-    const cars = await fetchCars();
+    const cars = await fetchCarsFromDB();
     const nameFilter = req.query.name?.toString().toLowerCase();
     const sortBy = req.query.sortBy?.toString();
     const sortOrder = req.query.sortOrder?.toString()?.toLowerCase() === 'desc' ? 'desc' : 'asc';
@@ -74,29 +61,76 @@ app.get("/cars", async (req, res) => {
 
 app.get("/cars/:id", async (req, res) => {
     const id = req.params.id;
-    const cars = await fetchCars();
-    const car = cars.find(car => car.id === id);
+    const car = await findCarById(id);
+
     if (!car) {
-        return res.status(404).json({ error: "Car not found" });
+        return res.status(404).render("error", { error: "Car not found" });
     }
-    const manufacturers = await fetchManufacturers();
-    const manufacturer = manufacturers.find(manufacturer => manufacturer.id === car.manufacturer.id);
+
+    const manufacturer = await findManufacturerById(car.manufacturer.id);
+
     res.render("car-detail", {
-        title: "Cars",
+        title: "Car Details",
         car: car,
         manufacturer: manufacturer
     });
 });
 
+// Show car edit form
+app.get("/cars/:id/edit", async (req, res) => {
+    const id = req.params.id;
+    const car = await findCarById(id);
+    const manufacturers = await fetchManufacturersFromDB();
+
+    if (!car) {
+        return res.status(404).render("error", { error: "Car not found" });
+    }
+
+    res.render("car-edit", {
+        title: "Edit Car",
+        car,
+        manufacturers
+    });
+});
+
+// Handle car edit form submission
+app.post("/cars/:id/edit", async (req, res) => {
+    const id = req.params.id;
+
+    // Extract form data
+    const updatedCar: Partial<Car> = {
+        name: req.body.name,
+        price: parseFloat(req.body.price),
+        category: req.body.category,
+        isAvailable: req.body.isAvailable === 'true',
+        description: req.body.description
+    };
+
+    // Handle features as array
+    if (req.body.features) {
+        updatedCar.features = req.body.features.split(',').map((f: string) => f.trim());
+    }
+
+    // Update car in database
+    const success = await updateCar(id, updatedCar);
+
+    if (success) {
+        res.redirect(`/cars/${id}`);
+    } else {
+        res.status(500).render("error", { error: "Failed to update car" });
+    }
+});
 
 app.get("/manufacturers", async (req, res) => {
-    const manufacturers = await fetchManufacturers();
+    const manufacturers = await fetchManufacturersFromDB();
     const nameFilter = req.query.name?.toString().toLowerCase();
     const sortBy = req.query.sortBy?.toString();
     const sortOrder = req.query.sortOrder?.toString()?.toLowerCase() === 'desc' ? 'desc' : 'asc';
+
     let filteredManufacturers = nameFilter
         ? manufacturers.filter(manufacturer => manufacturer.name.toLowerCase().includes(nameFilter))
         : manufacturers;
+    
     if (sortBy && filteredManufacturers.length > 0 && sortBy in filteredManufacturers[0]) {
         filteredManufacturers.sort((a, b) => {
             if (typeof a[sortBy as keyof Manufacturer] === 'string') {
@@ -115,6 +149,7 @@ app.get("/manufacturers", async (req, res) => {
             }
         });
     }
+
     res.render("manufacturers", {
         title: "Manufacturers",
         manufacturers: filteredManufacturers,
@@ -124,21 +159,41 @@ app.get("/manufacturers", async (req, res) => {
 
 app.get("/manufacturers/:id", async (req, res) => {
     const id = req.params.id;
-    const manufacturers = await fetchManufacturers();
-    const manufacturer = manufacturers.find(manufacturer => manufacturer.id === id);
-    if (!manufacturer) {
-        return res.status(404).json({ error: "Manufacturer not found" });
-    }
-    res.render("manufacturer-detail", { manufacturer });
-});
+    const manufacturer = await findManufacturerById(id);
 
+    if (!manufacturer) {
+        return res.status(404).render("error", { error: "Manufacturer not found" });
+    }
+
+    res.render("manufacturer-detail", {
+        title: "Manufacturer Details",
+        manufacturer
+    });
+});
 
 app.get("/", async (req, res) => {
-    const cars = await fetchCars();
-    res.render("index", { title: "Home", message: "Welcome to the Car App", cars });
+    const cars = await fetchCarsFromDB();
+    res.render("index", {
+        title: "Home",
+        message: "Welkom bij de Auto Catalogus",
+        cars
+    });
 });
 
 
-app.listen(app.get("port"), () => {
-    console.log("Server started on http://localhost:" + app.get("port"));
-});
+// Start the server with database connection
+async function startServer() {
+    try {
+        // Connect to MongoDB before starting the server
+        await connectDB();
+
+        app.listen(app.get("port"), () => {
+            console.log(`Server started on http://localhost:${app.get("port")}`);
+        });
+    } catch (error) {
+        console.error('Failed to start server:', error);
+        process.exit(1);
+    }
+}
+
+startServer();

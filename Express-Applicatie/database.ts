@@ -1,7 +1,8 @@
 import { MongoClient, Collection, Db } from 'mongodb';
 import fetch from 'node-fetch';
 import dotenv from 'dotenv';
-import {Car, Manufacturer} from './interfaces'
+import bcrypt from "bcrypt";
+import {Car, Manufacturer, User} from './interfaces'
 
 dotenv.config();
 
@@ -9,8 +10,10 @@ dotenv.config();
 // MongoDB connection
 let client: MongoClient;
 let db: Db;
+const saltRounds: number = 10;
 let carsCollection: Collection<Car>;
 let manufacturersCollection: Collection<Manufacturer>;
+let userCollection: Collection<User>;
 
 // API URLs
 const CARS_JSON = 'https://raw.githubusercontent.com/HoudaifaBO/cars-json/main/cars.json';
@@ -31,6 +34,7 @@ export async function connectDB(): Promise<void> {
         db = client.db('carCatalog'); // Use a specific database name
         carsCollection = db.collection<Car>('cars');
         manufacturersCollection = db.collection<Manufacturer>('manufacturers');
+        userCollection = db.collection<User>('users');
 
         // Check if collections are empty and populate if needed
         await initializeData();
@@ -51,6 +55,9 @@ async function initializeData(): Promise<void> {
     } else {
         console.log('Database already has data. Using existing data.');
     }
+    
+    // Add this line to create initial users
+    await createInitialUsers();
 }
 
 // Fetch data from API and store in MongoDB
@@ -90,6 +97,69 @@ async function populateDatabase(): Promise<void> {
         console.error('Error populating database:', error);
         throw error;
     }
+}
+
+export async function findUserByEmail(email: string) {
+    return await userCollection.findOne({ email: email });
+}
+
+
+async function createInitialUsers() {
+    if (await userCollection.countDocuments() > 0) { return; }
+    const adminEmail = process.env.ADMIN_EMAIL;
+    const adminPassword = process.env.ADMIN_PASSWORD;
+    const userEmail = process.env.USER_EMAIL;
+    const userPassword = process.env.USER_PASSWORD;
+
+    if (!adminEmail || !adminPassword || !userEmail || !userPassword) {
+        throw new Error("Admin and User email or password must be set in the environment");
+    }
+
+    const adminHash = await bcrypt.hash(adminPassword, saltRounds);
+    const userHash = await bcrypt.hash(userPassword, saltRounds);
+
+    await userCollection.insertMany([
+        { email: adminEmail, password: adminHash, role: "ADMIN" },
+        { email: userEmail, password: userHash, role: "USER" }
+    ]);
+}
+
+export async function login(email: string, password: string) {
+    if (email === "" || password === "") {
+        throw new Error("Email and password required");
+    }
+    let user: User | null = await findUserByEmail(email);
+    if (user) {
+        if (user.password && await bcrypt.compare(password, user.password)) {
+            return user;
+        } else {
+            throw new Error("Password incorrect");
+        }
+    } else {
+        throw new Error("User not found");
+    }
+}
+
+export async function register(email: string, password: string) {
+    if (email === "" || password === "") {
+        throw new Error("Email and password required");
+    }
+    
+    const existingUser = await findUserByEmail(email);
+    if (existingUser) {
+        throw new Error("User already exists");
+    }
+    
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    
+    const newUser: User = {
+        email: email,
+        password: hashedPassword,
+        role: "USER"
+    };
+    
+    const result = await userCollection.insertOne(newUser);
+    return result.insertedId;
 }
 
 // Functions to fetch data from MongoDB

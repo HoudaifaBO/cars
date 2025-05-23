@@ -1,16 +1,19 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import path from "path";
-import {
-    connectDB,
-    fetchCarsFromDB,
-    fetchManufacturersFromDB,
-    findCarById,
-    findManufacturerById,
-    updateCar,
-    updateManufacturer
+import { 
+  connectDB, 
+  fetchCarsFromDB, 
+  fetchManufacturersFromDB,
+  findCarById,
+  findManufacturerById,
+  updateCar
 } from './database';
-import { Car, Manufacturer } from './interfaces'
+import { loginRouter } from "./routers/loginRouter";
+import { registerRouter } from "./routers/registerRouter";
+import { secureMiddleware, ensureAdmin } from "./middleware/secureMiddleware";
+import session from "express-session";
+import { Car, Manufacturer } from "./interfaces";
 
 dotenv.config();
 
@@ -24,7 +27,33 @@ app.set("views", path.join(__dirname, "views"));
 
 app.set("port", process.env.PORT ?? 3000);
 
-app.get("/cars", async (req, res) => {
+// Define the session type
+declare module "express-session" {
+  interface SessionData {
+    user: {
+      _id?: string;
+      role: "ADMIN" | "USER";
+      email: string;
+      [key: string]: any;
+    };
+  }
+}
+
+// Session middleware
+app.use(
+  session({
+    secret: "your secret key",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
+// Auth routes
+app.use(loginRouter());
+app.use(registerRouter());
+
+// Secure all app routes with secureMiddleware
+app.get("/cars", secureMiddleware, async (req, res) => {
     const cars = await fetchCarsFromDB();
     const nameFilter = req.query.name?.toString().toLowerCase();
     const sortBy = req.query.sortBy?.toString();
@@ -59,16 +88,16 @@ app.get("/cars", async (req, res) => {
     });
 });
 
-app.get("/cars/:id", async (req, res) => {
+app.get("/cars/:id", secureMiddleware, async (req, res) => {
     const id = req.params.id;
     const car = await findCarById(id);
-
+    
     if (!car) {
         return res.status(404).render("error", { error: "Car not found" });
     }
-
+    
     const manufacturer = await findManufacturerById(car.manufacturer.id);
-
+    
     res.render("car-detail", {
         title: "Car Details",
         car: car,
@@ -76,28 +105,37 @@ app.get("/cars/:id", async (req, res) => {
     });
 });
 
-// Show car edit form
-app.get("/cars/:id/edit", async (req, res) => {
+// Admin-only edit routes
+app.get("/cars/:id/edit", secureMiddleware, ensureAdmin, async (req, res) => {
+    console.log("Edit route called for ID:", req.params.id);
     const id = req.params.id;
-    const car = await findCarById(id);
-    const manufacturers = await fetchManufacturersFromDB();
-
-    if (!car) {
-        return res.status(404).render("error", { error: "Car not found" });
+    
+    try {
+        const car = await findCarById(id);
+        console.log("Found car:", car);
+        
+        if (!car) {
+            console.log("Car not found");
+            return res.status(404).render("error", { error: "Car not found" });
+        }
+        
+        const manufacturers = await fetchManufacturersFromDB();
+        console.log("Found manufacturers:", manufacturers.length);
+        
+        res.render("car-edit", {
+            title: "Edit Car",
+            car,
+            manufacturers
+        });
+    } catch (error) {
+        console.error("Error in edit route:", error);
+        res.status(500).render("error", { error: "Server error" });
     }
-
-    res.render("car-edit", {
-        title: "Edit Car",
-        car,
-        manufacturers
-    });
 });
 
-// Handle car edit form submission
-app.post("/cars/:id/edit", async (req, res) => {
+app.post("/cars/:id/edit", secureMiddleware, ensureAdmin, async (req, res) => {
     const id = req.params.id;
-
-    // Extract form data
+    
     const updatedCar: Partial<Car> = {
         name: req.body.name,
         price: parseFloat(req.body.price),
@@ -105,15 +143,13 @@ app.post("/cars/:id/edit", async (req, res) => {
         isAvailable: req.body.isAvailable === 'true',
         description: req.body.description
     };
-
-    // Handle features as array
+    
     if (req.body.features) {
         updatedCar.features = req.body.features.split(',').map((f: string) => f.trim());
     }
-
-    // Update car in database
+    
     const success = await updateCar(id, updatedCar);
-
+    
     if (success) {
         res.redirect(`/cars/${id}`);
     } else {
@@ -121,12 +157,12 @@ app.post("/cars/:id/edit", async (req, res) => {
     }
 });
 
-app.get("/manufacturers", async (req, res) => {
+app.get("/manufacturers", secureMiddleware, async (req, res) => {
     const manufacturers = await fetchManufacturersFromDB();
     const nameFilter = req.query.name?.toString().toLowerCase();
     const sortBy = req.query.sortBy?.toString();
     const sortOrder = req.query.sortOrder?.toString()?.toLowerCase() === 'desc' ? 'desc' : 'asc';
-
+    
     let filteredManufacturers = nameFilter
         ? manufacturers.filter(manufacturer => manufacturer.name.toLowerCase().includes(nameFilter))
         : manufacturers;
@@ -149,7 +185,7 @@ app.get("/manufacturers", async (req, res) => {
             }
         });
     }
-
+    
     res.render("manufacturers", {
         title: "Manufacturers",
         manufacturers: filteredManufacturers,
@@ -157,36 +193,34 @@ app.get("/manufacturers", async (req, res) => {
     });
 });
 
-app.get("/manufacturers/:id", async (req, res) => {
+app.get("/manufacturers/:id", secureMiddleware, async (req, res) => {
     const id = req.params.id;
     const manufacturer = await findManufacturerById(id);
-
+    
     if (!manufacturer) {
         return res.status(404).render("error", { error: "Manufacturer not found" });
     }
-
-    res.render("manufacturer-detail", {
+    
+    res.render("manufacturer-detail", { 
         title: "Manufacturer Details",
-        manufacturer
+        manufacturer 
     });
 });
 
-app.get("/", async (req, res) => {
+app.get("/", secureMiddleware, async (req, res) => {
     const cars = await fetchCarsFromDB();
-    res.render("index", {
-        title: "Home",
-        message: "Welkom bij de Auto Catalogus",
-        cars
+    res.render("index", { 
+        title: "Home", 
+        message: "Welkom bij de Auto Catalogus", 
+        cars 
     });
 });
-
 
 // Start the server with database connection
 async function startServer() {
     try {
-        // Connect to MongoDB before starting the server
         await connectDB();
-
+        
         app.listen(app.get("port"), () => {
             console.log(`Server started on http://localhost:${app.get("port")}`);
         });

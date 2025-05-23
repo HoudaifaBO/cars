@@ -24,9 +24,11 @@
                         <a href="/cars" class="btn btn-secondary">
                             <i class="fas fa-arrow-left"></i> Terug naar overzicht
                         </a>
-                        <a href="/cars/<%= car.id %>/edit" class="btn btn-primary">
-                            <i class="fas fa-edit"></i> Bewerken
-                        </a>
+                        <% if(locals.user && locals.user.role === 'ADMIN') { %>
+                            <a href="/cars/<%= car.id %>/edit" class="btn btn-primary">
+                                <i class="fas fa-edit"></i> Bewerken
+                            </a>
+                        <% } %>
                     </div>
                 </div>
             </div>

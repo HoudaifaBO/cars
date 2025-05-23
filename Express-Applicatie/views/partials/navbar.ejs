@@ -1,23 +1,35 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="/">Auto Catalogus</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"
-            aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarMain">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link <%= locals.title === 'Home' ? 'active' : '' %>" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <%= locals.title === 'Cars' ? 'active' : '' %>" href="/cars">Auto's</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <%= locals.title === 'Manufacturers' ? 'active' : '' %>"
-                        href="/manufacturers">Fabrikanten</a>
-                </li>
-            </ul>
-        </div>
+  <div class="container">
+    <a class="navbar-brand" href="/">Auto Catalogus</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarMain">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link <%= locals.title === 'Home' ? 'active' : '' %>" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <%= locals.title === 'Cars' ? 'active' : '' %>" href="/cars">Auto's</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <%= locals.title === 'Manufacturers' ? 'active' : '' %>" href="/manufacturers">Fabrikanten</a>
+        </li>
+      </ul>
+      <div class="d-flex">
+        <% if(locals.user) { %>
+          <span class="navbar-text me-3">
+            Ingelogd als: <strong><%= locals.user.email %></strong> 
+            (<%= locals.user.role %>)
+          </span>
+          <form action="/logout" method="POST">
+            <button type="submit" class="btn btn-outline-light btn-sm">Uitloggen</button>
+          </form>
+        <% } else { %>
+          <a href="/login" class="btn btn-outline-light btn-sm me-2">Login</a>
+          <a href="/register" class="btn btn-light btn-sm">Registreer</a>
+        <% } %>
+      </div>
     </div>
+  </div>
 </nav>
